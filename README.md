@@ -1,4 +1,4 @@
-# Twitter Bootstrap for Rails 3
+# Twitter Bootstrap v 2.0.2 for Rails 3
 Bootstrap is a toolkit from Twitter designed to kickstart development of webapps and sites.
 It includes base CSS and HTML for typography, forms, buttons, tables, grids, navigation, and more.
 
@@ -6,13 +6,18 @@ It includes base CSS and HTML for typography, forms, buttons, tables, grids, nav
 
 anjlab-bootstrap-rails project integrates Bootstrap CSS (with SASS flavour) and JS toolkits for Rails 3 projects
 
-## Rails 3.1
+## Rails > 3.1
 Include Bootstrap in Gemfile;
 
 ``` ruby
-gem 'simple_form'
-gem 'bootstrap-rails', :require => 'bootstrap-rails',
-                              :git => 'git://github.com/xdite/bootstrap-rails.git'
+gem 'anjlab-bootstrap-rails', '>= 2.0', :require => 'bootstrap-rails'
+```
+
+or you can install from latest build;
+
+``` ruby
+gem 'anjlab-bootstrap-rails', :require => 'bootstrap-rails',
+                              :git => 'git://github.com/anjlab/bootstrap-rails.git'
 ```
 
 and run bundle install.
@@ -23,31 +28,27 @@ Add necessary stylesheet file to app/assets/stylesheets/application.css
 
 ``` css
 *= require bootstrap
+*= require responsive
 ```
 
-You can override boostrapr variables:
+You can override bootstrap variables:
 
-``` csss
-// Create app/assets/stylesheets/bootstrap.scss
-// CSS Reset
-@import "reset.scss";
+ 1. replace `*= require bootstrap` with `*= require app_bootstrap`
+ 2. create `app_bootstrap.css.scss` :
 
-// Core variables and mixins
-@import "variables.scss"; // Modify this for custom colors, font-sizes, etc
+```scss
+// change colors
+$linkColor: red;
 
-$linkColor: red; // Make all links red
+// change grid
+$gridColumnWidth: 70px;
+$gridGutterWidth: 10px;
 
-@import "mixins.scss";
-
-// Grid system and page structure
-@import "scaffolding.scss";
-
-// Styled patterns and elements
-@import "type.scss";
-@import "forms.scss";
-@import "tables.scss";
-@import "patterns.scss";
+// import original bootstrap
+@import "bootstrap";
+@import "responsive";
 ```
+ NOTE: restart `pow` if you are using it.
 
 ## Javascripts
 
@@ -58,20 +59,36 @@ Add necessary javascript(s) files to app/assets/javascripts/application.js
 //= require bootstrap
 
 // Or peek any of them yourself
-//= require bootstrap-alerts
-//= require bootstrap-dropdown
+//= require bootstrap-transition
+//= require bootstrap-alert
 //= require bootstrap-modal
-//= require bootstrap-twipsy
-//= require bootstrap-popover
+//= require bootstrap-dropdown
 //= require bootstrap-scrollspy
-//= require bootstrap-tabs
+//= require bootstrap-tab
+//= require bootstrap-tooltip
+//= require bootstrap-popover
+//= require bootstrap-button
+//= require bootstrap-collapse
+//= require bootstrap-carousel
+//= require bootstrap-typeahead
 ```
+
+## Upgrade notes from 1.4
+
+ - [Twitter Bootstrap Upgrade](http://twitter.github.com/bootstrap/upgrading.html)
+ - rm -rf tmp/cache
+
+## For Developers
+
+ - Fork this repo if you want fix rails integration bug
+ - Fork [SASS repo](https://github.com/yury/bootstrap) if you want fix SASS bug
         
 ## Thanks
 Thanks Twitter for Bootstrap
 http://twitter.github.com/bootstrap
 
 Inspired by Seyhun Akyürek and his [twitter-bootstrap-rails gem](https://github.com/seyhunak/twitter-bootstrap-rails)
+
 
 ## License
 Copyright (c) 2011 AnjLab
